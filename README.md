@@ -13,7 +13,7 @@ In order to keep things fast and at the same time avoid false positives, I had t
 # Usage:
 Just set up the paths for your log files and add the following to hMailServer’s External Virus Scanner tab:
 
-Scanner executable: "C:\Learn\Defender.bat" "%FILE%"
+Scanner executable: "C:\Your_Path\Defender.bat" "%FILE%"
 
 Return value: 2
 
