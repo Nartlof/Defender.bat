@@ -30,6 +30,15 @@ if "%~1"=="" (
   exit /b
 )
 
+REM Checking if the file exists
+REM Set the variable to false by default
+set "FileIsThere=false"
+
+REM Check if the file exists
+if exist "%~1" (
+    set "FileIsThere=true"
+)
+
 REM Run Windows Defender for the first time
 "%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File "%~1" -DisableRemediation > "%templogfile%"
 REM Check if the file is good to go
@@ -52,8 +61,16 @@ if %errorlevel% equ 0 (
     del "%templogfile%"
     exit /b 2
 ) 
+
+REM Print the message based on the variable value
+if "%FileIsThere%"=="true" (
+    echo The file exists. >> "%logfile%"
+) else (
+    echo The file does not exist. >> "%logfile%"
+)
+
 REM It was some error. Try again
-echo "Fail on the first verification. Trying again." >> "%logfile%"
+echo Fail on the first verification. Trying again. >> "%logfile%"
 REM Wait a bit in order to make file system to settle
 REM Most times the error on the first run is a failure on reading the file
 REM Waiting a bit solves this issue. 
