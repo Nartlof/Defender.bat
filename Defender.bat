@@ -31,7 +31,7 @@ if "%~1"=="" (
 )
 
 REM Run Windows Defender for the first time
-"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File "%~1" -DisableRemediation > "%templogfile%"
+"%ProgramW6432%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File "%~1" -DisableRemediation > "%templogfile%"
 REM Check if the file is good to go
 if %errorlevel% equ 0 (
     Rem File is clean
@@ -58,7 +58,7 @@ REM Wait a bit in order to make file system to settle
 REM Most times the error on the first run is a failure on reading the file
 REM Waiting a bit solves this issue. 
 timeout /T 3
-"%ProgramFiles%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File "%~1" -DisableRemediation > "%templogfile%"
+"%ProgramW6432%\Windows Defender\MpCmdRun.exe" -Scan -ScanType 3 -File "%~1" -DisableRemediation > "%templogfile%"
 if %errorlevel% equ 0 (
     REM Second rum was fine. There was no viruses
     echo File was clean on the second verification: "%filettoverify%" >> "%logfile%"
